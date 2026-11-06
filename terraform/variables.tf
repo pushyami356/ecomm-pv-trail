@@ -1,6 +1,6 @@
 variable "aws_region" {
   type    = string
-  default = "eu-north-1"
+  default = "ap-southeast-2"
 }
 variable "cluster_name" {
   type    = string
