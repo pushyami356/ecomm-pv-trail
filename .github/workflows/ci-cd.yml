@@ -92,6 +92,18 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-southeast-2
           
+      - name: Verify AWS account and ECR registry
+        if: github.event_name != 'pull_request'
+        run: |
+          aws sts get-caller-identity
+
+          echo "ECR Registry: $ECR_REGISTRY"
+
+          test -n "$ECR_REGISTRY" || {
+            echo "ECR_REGISTRY variable is empty"
+            exit 1
+          }   
+          
 
       - name: Login to Amazon ECR
         if: github.event_name != 'pull_request'
