@@ -29,7 +29,7 @@ jobs:
         service: [user-service, product-service, order-service]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Test ${{ matrix.service }}
         working-directory: services/${{ matrix.service }}
@@ -44,7 +44,7 @@ jobs:
     runs-on: [self-hosted, linux, x64, ecommerce-runner]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Build frontend
         working-directory: frontend
@@ -57,7 +57,7 @@ jobs:
     needs: [test, frontend-build]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -82,11 +82,11 @@ jobs:
           - order-service
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Configure AWS credentials
         if: github.event_name != 'pull_request'
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v5
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -163,7 +163,7 @@ jobs:
     if: github.event_name != 'pull_request'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
           token: ${{ secrets.GITOPS_TOKEN || secrets.GITHUB_TOKEN }}
