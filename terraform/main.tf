@@ -49,8 +49,9 @@ module "vpc" {
 # =====================================
 
 module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  version = "~> 21.0"
+  source      = "terraform-aws-modules/eks/aws"
+  version     = "~> 21.0"
+  enable_irsa = false
 
   name               = var.cluster_name
   kubernetes_version = "1.33"
@@ -74,7 +75,7 @@ module "eks" {
 
     aws-ebs-csi-driver = {
       pod_identity_association = [{
-        role_arn        = aws_iam_role.ebs_csi.arn
+        role_arn        = "arn:aws:iam::439187708175:role/ecommerce-ebs-csi-role"
         service_account = "ebs-csi-controller-sa"
       }]
     }
