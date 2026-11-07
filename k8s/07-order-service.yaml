@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: 836003244254.dkr.ecr.eu-north-1.amazonaws.com/ecommerce/order-service:8d49a49ab109
+          image: 439187708175.dkr.ecr.ap-southeast-2.amazonaws.com/ecommerce/order-service:COMMIT_SHA
           imagePullPolicy: Always
           ports:
             - containerPort: 5003
