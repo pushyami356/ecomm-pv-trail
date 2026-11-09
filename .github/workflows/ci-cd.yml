@@ -21,16 +21,6 @@ env:
   ECR_REGISTRY: ${{ vars.ECR_REGISTRY }}
 
 jobs:
-  steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Check Repository
-        run: |
-          pwd
-          ls -la
-          git status
-
   test:
     runs-on: [self-hosted, linux, x64, ecommerce-runner]
     strategy:
