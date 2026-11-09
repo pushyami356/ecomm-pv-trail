@@ -685,8 +685,23 @@ spec:
                 port:
                   number: 80
 ```
+Check NGINX Ingress installation
+```bash
+kubectl get pods -n ingress-nginx
+
+kubectl get svc -n ingress-nginx
+
+kubectl get ingressclass
+
+kubectl get ingress -n ecommerce
+```
 
 modify in frontend.yaml
+
+```bash
+spec:
+  type: ClusterIP
+```
 change service
 loadbalancer to clusterIp
 
