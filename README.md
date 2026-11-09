@@ -345,11 +345,38 @@ kubectl apply -f k8s/ingress.yaml
 ```
 Verify:
 ```bash
-kubectl get ingress -n student-app
+kubectl get ingress -n ecommerce
 ```
 Also check:
 ```bash
-kubectl describe ingress -n student-app
+kubectl describe ingress -n ecommerce
+```
+Check which StorageClass
+```bash
+kubectl get storageclass
+```
+Step 1: Check existing PVCs
+Run:
+```bash
+kubectl get pvc -n ecommerce
+```
+Confirm that your PostgreSQL PVCs are already using gp3-csi.
+Step 2: Make gp3-csi the default
+Run:
+```bash
+kubectl patch storageclass gp3-csi \
+  -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
+Step 3: Remove the default designation from gp2
+Run:
+```bash
+kubectl patch storageclass gp2 \
+  -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```
+Step 4: Permanently remove gp2
+After confirming that no existing PVC or PV uses gp2, you can delete the old StorageClass:
+```bash
+kubectl delete storageclass gp2```
 ```
 ## STEP 11 — Install Helm
 
@@ -1174,7 +1201,6 @@ helm repo add prometheus-community \
 helm repo update
 
 kubectl create namespace monitoring
-
 
 ```
 
