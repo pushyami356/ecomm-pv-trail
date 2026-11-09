@@ -300,6 +300,57 @@ kubectl version --client
 ```
 Before creating EKS, we will confirm that the selected Kubernetes version is supported in your AWS region.
 
+## Install  Ingress-NGINX
+Add the Ingress-NGINX Helm repository
+```bash
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+```
+Update Helm repositories:
+```bash
+helm repo update
+```
+Verify:
+```bash
+helm repo list
+```
+2. Install Ingress-NGINX controller
+   
+Use this single-line command to avoid Bash continuation errors:
+```bash
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace --set controller.service.type=LoadBalancer
+```
+
+Verify installation:
+```bash
+helm list -n ingress-nginx
+```
+3. Wait for AWS Load Balancer provisioning
+Run:
+```bash
+kubectl get svc -n ingress-nginx ingress-nginx-controller -w
+```
+Wait until EXTERNAL-IP displays an AWS hostname, for example:
+NAME                       TYPE           CLUSTER-IP     EXTERNAL-IP
+ingress-nginx-controller   LoadBalancer   10.x.x.x       xxxx.elb.amazonaws.com
+
+Expected
+ An AWS Load Balancer hostname appears instead of <pending>.
+
+Press Ctrl + C after the hostname appears.
+
+4. Apply your Ingress resource
+Therefore, use:
+```bash
+kubectl apply -f k8s/ingress.yaml
+```
+Verify:
+```bash
+kubectl get ingress -n student-app
+```
+Also check:
+```bash
+kubectl describe ingress -n student-app
+```
 ## STEP 11 — Install Helm
 
 Open ecomm-server EC2 gitbash terminal
