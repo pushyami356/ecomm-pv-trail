@@ -666,7 +666,7 @@ after all resources created check
 ## Step 23 - Verify all resources 
 
 vim ecommerce-ingress.yaml
-```
+```bash
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -684,54 +684,54 @@ spec:
                 name: frontend
                 port:
                   number: 80
-```bash
+```
 
 modify in frontend.yaml
 change service
 loadbalancer to clusterIp
 
-```
-helm list -n monitoring
 ```bash
-Then apply the CRDs from the same chart version. For your previously used chart version 92.18.0:
+helm list -n monitoring
 ```
+Then apply the CRDs from the same chart version. For your previously used chart version 92.18.0:
+```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
 helm repo update
 
 helm show crds prometheus-community/kube-prometheus-stack \
   --version 92.18.0 | kubectl apply -f -
-  ```bash
+  ```
 If the monitoring Helm release does not exist, install the stack:
-```
+```bash
 helm upgrade --install monitoring \
   prometheus-community/kube-prometheus-stack \
   --namespace monitoring \
   --create-namespace
-  ```bash
+  ```
 Verify ServiceMonitor CRD
-```
+```bash
 kubectl get crd servicemonitors.monitoring.coreos.com
-```bash
+```
 Check the Prometheus Operator:
-```
+```bash
 kubectl get pods -n monitoring
-```bash
+```
 Apply your ServiceMonitor YAML
-```
+```bash
 kubectl apply -f k8s/10-servicemonitors.yaml
-```bash
+```
 Verify:
-```
-kubectl get servicemonitors -n ecommerce
 ```bash
-Expected:
+kubectl get servicemonitors -n ecommerce
 ```
+Expected:
+```bash
 NAME
 user-service
 product-service
 order-service
-```bash
+```
 
 
 Verify EBS CSI driver
