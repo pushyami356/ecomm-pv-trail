@@ -1423,6 +1423,9 @@ editor.)
 
 Change visualization to Stat
 
+<img width="958" height="397" alt="Screenshot 2026-11-09 172549" src="https://github.com/user-attachments/assets/e2d87dea-fba4-40a2-b98f-d7f738d482cb" />
+
+
 **1. Click All visualizations**
 
 At the top of the right-hand panel, next to Suggestions, click All visualizations.
@@ -1467,9 +1470,13 @@ sum(rate(container_cpu_usage_seconds_total{
 
 }[5m]))
 ```
+
 Click on Run Queries-->  click on Rightside navigation bar All Visualizations--> select Bar Chat-->Title: CPU usage -->Discription: CPU usage --> click on Save--> message:
 
 CPU usage --> save
+
+<img width="1020" height="557" alt="Screenshot 2026-11-09 172455" src="https://github.com/user-attachments/assets/a5cbe4b8-beb2-4a24-bb39-4b1cfd57bdc0" />
+
 
 
 
@@ -1482,6 +1489,8 @@ sum(container_memory_working_set_bytes{
 
 })
 ```
+<img width="1017" height="586" alt="Screenshot 2026-11-09 172900" src="https://github.com/user-attachments/assets/1e67c697-17ac-4442-9d02-e32c6527ab02" />
+
 ## STEP 38 — Configure Alertmanager
 
 Open Ecommerce server gitbash terminal
