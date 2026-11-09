@@ -665,6 +665,30 @@ after all resources created check
 
 ## Step 23 - Verify all resources 
 
+vim ecommerce-ingress.yaml
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ecommerce-ingress
+  namespace: ecommerce
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
+
+modify in frontend.yaml
+change service
+loadbalancer to clusterIp
+
 Verify EBS CSI driver
 
 ```bash
