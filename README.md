@@ -679,13 +679,16 @@ cd multi-svc-ecommrce-app-cicd
 **set git username and git email id**
 
 ```bash
-git config --global user.name harathi-mutyam
-git config --global user.email ehmutyam@gmail.com
+git config --global user.name pushyami356
+git config --global user.email pushyami.illapani@gmail.com
+```bash
 git pull origin main
 git status
+```
 
 
 # Create a new feature branch changes
+```bash
 
 git checkout -b feature
 
@@ -693,15 +696,18 @@ git checkout -b feature
 git branch --show-current   or git branch
 
 git status
+```
 
 git add  terraform/terraform.tfvars
 
 git commit -m "Update terraform.tfvars file admin cidr with ec2"
+```bash
 git config --global user.email  pushyami.illapani@gmail.com
 
 git config --global user.name pushyami356
 
 git push -u origin feature
+```
 
 enter
 
@@ -729,10 +735,12 @@ open gitbash terminal
 
 After merging, update your local main branch:
 bash
+```bash
 
 git checkout main
 
 git pull origin main
+```
 
 
 git add terraform/main.tf terraform/ecr.tf terraform/outputs.tf
