@@ -586,7 +586,7 @@ terraform state list
 aws eks list-clusters --region eu-north-1
 
 aws ecr describe-repositories \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'repositories[].repositoryName' \
   --output table
 ```
