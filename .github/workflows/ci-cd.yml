@@ -2,9 +2,7 @@ name: E-Commerce Microservices CI/CD
 
 on:
   push:
-    branches: 
-      - main
-      - feature  
+    branches: [main]
     paths-ignore:
       - "k8s/**"
       - 'README.md'
