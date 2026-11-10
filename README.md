@@ -185,7 +185,7 @@ sudo apt install -y \
 Clone your existing repository:
 ```bash
 cd ~
-git clone https://github.com/harathi-mutyam/multi-svc-ecommrce-app-cicd.git
+git clone https://github.com/pushyami356/multi-svc-ecommerce-app.git
 cd multi-svc-ecommrce-app-cicd
 ls -la
 ```
