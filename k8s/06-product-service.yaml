@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: 439187708175.dkr.ecr.ap-southeast-2.amazonaws.com/ecommerce/product-service:5063f6dc6226
+          image: 439187708175.dkr.ecr.ap-southeast-2.amazonaws.com/ecommerce/product-service:3d9bffbdb4a8
           imagePullPolicy: Always
           ports:
             - containerPort: 5002
