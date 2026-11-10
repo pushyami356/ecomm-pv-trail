@@ -203,7 +203,7 @@ change node groups instance type ,minimum size , maximum size and desired size a
 
 Open AWS Console in browser
 
-Check EC2 → Instances, EKS → Clusters, and ECR → Private repositories in eu-north-1.
+Check EC2 → Instances, EKS → Clusters, and ECR → Private repositories in ap-southeast-2.
 
 ## STEP 7— Install AWS CLI on Management Server
 
@@ -228,7 +228,7 @@ aws sts get-caller-identity
 Otherwise, configure your authorized AWS CLI credentials securely using your existing IAM setup. Do not share your access keys here.
 Set the region:
 ```bash
-aws configure set region eu-north-1
+aws configure set region ap-southeast-2
 aws configure
 ```
 Verify:
@@ -453,7 +453,7 @@ Copy the generated token.
 
 Now open your GitHub repository in browser:
 
-harathi-mutyam/multi-svc-ecommrce-app-cicd
+pushyami356/multi-svc-ecommrce-app-cicd
 
 Navigate to:Settings → Secrets and variables → Actions → Secrets → New repository secret
 
@@ -546,7 +546,7 @@ aws sts get-caller-identity
 ```
 Set the region:
 ```bash
-aws configure set region eu-north-1
+aws configure set region ap-southeast-2
 aws configure
 ```
 enter access key ,secret key , enter region, json
@@ -661,7 +661,7 @@ Before modifying Terraform, check the existing state and resources:
 ```bash
 terraform init
 terraform state list
-aws eks list-clusters --region eu-north-1
+aws eks list-clusters --region ap-southeast-2
 
 aws ecr describe-repositories \
   --region ap-southeast-2 \
@@ -776,7 +776,7 @@ Click on generate  --> save the personal_access_token at somewhere
 **Verify your existing EKS Terraform configuration**
 
 ```bash
-aws iam list-attached-user-policies   --user-name harathi1203
+aws iam list-attached-user-policies   --user-name pushyami
 ```
 expected policy 
 
@@ -894,7 +894,7 @@ Verify EBS CSI driver
 aws eks describe-addon \
   --cluster-name ecommerce-cluster \
   --addon-name aws-ebs-csi-driver \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'addon.{Status:status,Health:health.issues,PodIdentity:podIdentityAssociations}' \
   --output json
 ```
@@ -910,7 +910,7 @@ Expected: STATUS must be Ready
 Verify ECR repositories
 ```bash
 aws ecr describe-repositories \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'repositories[].repositoryName' \
   --output table
 ```
@@ -930,7 +930,7 @@ Check the cluster:
 ```bash
 aws eks describe-cluster \
   --name ecommerce-cluster \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'cluster.[name,status,version]' \
   --output table
  
@@ -940,7 +940,7 @@ aws eks describe-cluster \
 
 ```bash
 aws eks update-kubeconfig \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --name ecommerce-cluster
 ```
 Check the worker nodes:
@@ -955,7 +955,7 @@ Check the add-ons:
 ```bash
 aws eks list-addons \
   --cluster-name ecommerce-cluster \
-  --region eu-north-1
+  --region ap-southeast-2
 ```
 Push the changes to github from ec2
 ```bash
@@ -975,11 +975,11 @@ terraform output ecr_urls
 output will be
 ```bash
 {
-  "ecommerce/api-gateway" = "263860684319.dkr.ecr.eu-north-1.amazonaws.com/ecommerce/api-gateway"
-  "ecommerce/frontend" = "263860684319.dkr.ecr.eu-north-1.amazonaws.com/ecommerce/frontend"
-  "ecommerce/order-service" = "263860684319.dkr.ecr.eu-north-1.amazonaws.com/ecommerce/order-service"
-  "ecommerce/product-service" = "263860684319.dkr.ecr.eu-north-1.amazonaws.com/ecommerce/product-service"
-  "ecommerce/user-service" = "263860684319.dkr.ecr.eu-north-1.amazonaws.com/ecommerce/user-service"
+  "ecommerce/api-gateway" = "263860684319.dkr.ecr.ap-southeast-2.amazonaws.com/ecommerce/api-gateway"
+  "ecommerce/frontend" = "263860684319.dkr.ecr.ap-southeast-2.amazonaws.com/ecommerce/frontend"
+  "ecommerce/order-service" = "263860684319.dkr.ecr.ap-southeast-2.amazonaws.com/ecommerce/order-service"
+  "ecommerce/product-service" = "263860684319.dkr.ecr.ap-southeast-2.amazonaws.com/ecommerce/product-service"
+  "ecommerce/user-service" = "263860684319.dkr.ecr.ap-southeast-2.amazonaws.com/ecommerce/user-service"
 }
 ```
 ```bash
@@ -997,18 +997,18 @@ gp3    kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   false     
 ```bash
 aws eks list-addons \
   --cluster-name ecommerce-cluster \
-  --region eu-north-1
+  --region ap-southeast-2
 
 aws eks describe-addon \
   --cluster-name ecommerce-cluster \
   --addon-name aws-ebs-csi-driver \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'addon.{Status:status,Health:health.issues,PodIdentity:podIdentityAssociations}' \
   --output json
     "Status": "ACTIVE"
 
 aws ecr describe-repositories \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'repositories[].repositoryName' \
   --output table
  
@@ -1036,8 +1036,8 @@ Repository variables, configure
 
 | Variable | Value |
 | --- | --- |
-| AWS_REGION | eu-north-1 |
-| ECR_REGISTRY | 263860684319.dkr.ecr.eu-north-1.amazonaws.com |
+| AWS_REGION | ap-southeast-2 |
+| ECR_REGISTRY | 263860684319.dkr.ecr.ap-southeast-2.amazonaws.com |
 | SONAR_HOST_URL | http://localhost:9000 |
 
 	
@@ -1081,7 +1081,7 @@ open aws console login--> ecr--> check the changes
 Or run the below command in server ec2 gitbash terminal 
 
 ```bash
-aws ecr describe-images   --repository-name ecommerce/frontend   --region eu-north-1   --query 'imageDetails[].imageTags'
+aws ecr describe-images   --repository-name ecommerce/frontend   --region ap-southeast-2   --query 'imageDetails[].imageTags'
  
 git pull origin main
 git log -3 --oneline
@@ -1168,7 +1168,7 @@ kubectl get pods -n ecommerce
 
 kubectl get svc frontend -n ecommerce
 ```
-copy the loadbalancer dns name ada50eb750e674f2dbf0b8f6c0d7dd00-661072552.eu-north-1.elb.amazonaws.com
+copy the loadbalancer dns name ada50eb750e674f2dbf0b8f6c0d7dd00-661072552.ap-southeast-2.elb.amazonaws.com
 
 ```bash
 curl -I <paste it here>
@@ -1748,7 +1748,7 @@ Check the EKS Metrics Server add-on
 aws eks describe-addon \
   --cluster-name ecommerce-cluster \
   --addon-name metrics-server \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'addon.status' \
   --output text
 ```
@@ -1758,7 +1758,7 @@ Verify that the EKS Metrics Server add-on is available
 aws eks describe-addon-versions \
   --addon-name metrics-server \
   --kubernetes-version 1.33 \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'addons[].addonVersions[].addonVersion' \
   --output table
 ```
@@ -1767,7 +1767,7 @@ Install the Metrics Server add-on
 aws eks create-addon \
   --cluster-name ecommerce-cluster \
   --addon-name metrics-server \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --resolve-conflicts OVERWRITE
 ```
 This creates the Metrics Server add-on; it does not reinstall Prometheus.
@@ -1776,12 +1776,12 @@ Wait for installation
 aws eks wait addon-active \
   --cluster-name ecommerce-cluster \
   --addon-name metrics-server \
-  --region eu-north-1
+  --region ap-southeast-2
 
 aws eks describe-addon \
   --cluster-name ecommerce-cluster \
   --addon-name metrics-server \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'addon.{Status:status,Health:health.issues}' \
   --output json
 
@@ -2328,7 +2328,7 @@ Run:
 
 ```bash
 aws elbv2 describe-load-balancers \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'LoadBalancers[*].[LoadBalancerName,State.Code,DNSName]' \
   --output table
 ```
@@ -2336,7 +2336,7 @@ Check EBS volumes:
 
 ```bash
 aws ec2 describe-volumes \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'Volumes[*].[VolumeId,State,Size,Tags]' \
   --output json
 ```
@@ -2380,7 +2380,7 @@ aws sts get-caller-identity
 ### 43.6 -- Verify the repositories
 ```bash
 aws ecr describe-repositories \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'repositories[].repositoryName' \
   --output table
 ```
@@ -2409,7 +2409,7 @@ do
 
   aws ecr delete-repository \
     --repository-name "$repo" \
-    --region eu-north-1 \
+    --region ap-southeast-2 \
     --force \
     --query 'repository.repositoryName' \
     --output text
@@ -2425,7 +2425,7 @@ You should see the five repository names printed if all deletions succeed.
 Run:
 ```bash
 aws ecr describe-repositories \
-  --region eu-north-1 \
+  --region ap-southeast-2 \
   --query 'repositories[].repositoryName' \
   --output table
 ```
@@ -2462,7 +2462,7 @@ If everything Terraform manages has been deleted, this command should produce no
 
 Then verify the EKS cluster:
 ```bash
-aws eks list-clusters --region eu-north-1
+aws eks list-clusters --region ap-southeast-2
 
 ```
 check all are deleted or not in aws console login
